@@ -70,6 +70,7 @@ Create first file ``/home/USER/.cron/tab``:
     SHELL=/bin/bash
     43 0 * * 0 $HOME/.cron/backup.sh
 
+This will run every monday morning at 00:43.
 
 Create second file ``/home/USER/.cron/backup.sh``:
 .. code-block::
