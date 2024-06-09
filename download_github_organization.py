@@ -27,9 +27,18 @@ parser.add_argument(
     help=("Name of the organization on GitHub."),
 )
 parser.add_argument(
+    "-d",
+    "--output_dir",
+    metavar="OUTPUT_DIRECTORY",
+    type=str,
+    default=None,
+    required=False,
+    help="Directory where to write the output tar.gz.",
+)
+parser.add_argument(
     "-o",
-    "--output_path",
-    metavar="OUTPUT_PATH",
+    "--output_basename",
+    metavar="OUTPUT_BASENAME",
     type=str,
     default=None,
     required=False,
@@ -45,21 +54,27 @@ args = parser.parse_args()
 
 github_fine_acess_token_path = args.token_path
 name_of_github_organization = args.name
-output_path = args.output_path
+output_basename = args.output_basename
+output_dir = args.output_dir
 
-if output_path is None:
+if output_basename is None:
     timestamp = datetime.datetime.now().replace(microsecond=0).isoformat()
     timestamp = timestamp.replace(":", "-")  # needs to be a valid filename.
-    output_path = "{:s}_{:s}.tar.gz".format(
+    output_basename = "{:s}_{:s}.tar.gz".format(
         timestamp, name_of_github_organization
     )
+
+if output_dir is None:
+    output_dir = os.curdir
+
+output_path = os.path.join(output_dir, output_basename)
 
 if os.path.exists(output_path):
     raise RuntimeError("The output path '{:s}' already exists.")
 
 with open(github_fine_acess_token_path, "rt") as f:
     github_fine_acess_token = f.read()
-    github_fine_acess_token = str.strip(github_fine_acess_token) # no newline
+    github_fine_acess_token = str.strip(github_fine_acess_token)  # no newline
 
 with tempfile.TemporaryDirectory(prefix="github-backup-") as tmp:
     tmp = "/home/relleums/Desktop/ba"
