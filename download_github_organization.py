@@ -77,8 +77,6 @@ with open(github_fine_acess_token_path, "rt") as f:
     github_fine_acess_token = str.strip(github_fine_acess_token)  # no newline
 
 with tempfile.TemporaryDirectory(prefix="github-backup-") as tmp:
-    tmp = "/home/relleums/Desktop/ba"
-    os.makedirs(tmp, exist_ok=True)
     github_organization_dir = os.path.join(tmp, name_of_github_organization)
     gitbackcmd = [
         "github-backup",
