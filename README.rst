@@ -64,7 +64,8 @@ The script ``download_github_organization`` is just a wrapper which calls
 Installing a cronjob
 ********************
 
-Create first file ``/home/USER/.cron/tab``:
+Create first file ``/home/USER/.cron/tab.txt``:
+
 .. code-block::
 
     SHELL=/bin/bash
@@ -95,7 +96,7 @@ Set up crontab:
 
 .. code-block::
 
-    crontab .cron/tab
+    crontab .cron/tab.txt
 
 Check by listing:
 
