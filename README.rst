@@ -74,6 +74,7 @@ Create first file ``/home/USER/.cron/tab.txt``:
 This will run every monday morning at 00:43.
 
 Create second file ``/home/USER/.cron/backup.sh``:
+
 .. code-block::
 
     #!/bin/bash
