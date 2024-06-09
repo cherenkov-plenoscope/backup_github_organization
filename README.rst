@@ -64,4 +64,40 @@ The script ``download_github_organization`` is just a wrapper which calls
 Installing a cronjob
 ********************
 
-To be discussed...
+Create first file ``/home/USER/.cron/tab``:
+.. code-block::
+
+    SHELL=/bin/bash
+    43 0 * * 0 $HOME/.cron/backup.sh
+
+
+Create second file ``/home/USER/.cron/backup.sh``:
+.. code-block::
+
+    #!/bin/bash
+    source $HOME/.bash_profile
+    python3 \
+    /home/USER/backup_github_organization/download_github_organization.py \
+    --token_path /home/USER/.github/fine-grained-access-tokens/backup.txt \
+    --name cherenkov-plenoscope \
+    --output_dir /home/USER/backup \
+    >> /home/USER/backup/log.txt 2>&1
+
+
+Make ``/home/USER/.cron/backup.sh`` executable
+
+.. code-block::
+
+    chmod +x /home/USER/.cron/backup.sh
+
+Set up crontab:
+
+.. code-block::
+
+    crontab .cron/tab
+
+Check by listing:
+
+.. code-block::
+
+    crontab -l
